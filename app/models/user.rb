@@ -6,11 +6,16 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 20 }
 
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: true
+
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :friend_requests
-  has_many :inverse_friend_requests, :class_name => "FriendRequests", :foreign_key => "friend_id"
+  has_many :inverse_friend_requests, :class_name => "FriendRequest", :foreign_key => "friend_id"
 
 
   def friends
