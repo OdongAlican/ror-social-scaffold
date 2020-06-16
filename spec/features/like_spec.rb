@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe 'Like', type: :feature do
-
   before(:each) do
     user = FactoryBot.create(:user)
     visit root_url
@@ -15,6 +14,4 @@ RSpec.describe 'Like', type: :feature do
     click_on 'Like!'
     expect(page).to have_content('Dislike!')
   end
-
-
 end

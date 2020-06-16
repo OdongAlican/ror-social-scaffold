@@ -13,14 +13,14 @@ RSpec.describe 'authenticate a user', type: :feature do
     click_button 'Sign up'
   end
 
-  scenario "login a user" do
+  scenario 'login a user' do
     user = FactoryBot.create(:user)
     visit root_url
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Log in'
-    expect(page).to have_content("Signed in successfully")
-    expect(page).to have_content("Recent posts") 
+    expect(page).to have_content('Signed in successfully')
+    expect(page).to have_content('Recent posts')
   end
 
   scenario 'logout a user' do
@@ -32,6 +32,5 @@ RSpec.describe 'authenticate a user', type: :feature do
     click_on 'Sign out'
     expect(page).to have_content('Email')
     expect(page).to have_content('Sign up')
-  
   end
 end
