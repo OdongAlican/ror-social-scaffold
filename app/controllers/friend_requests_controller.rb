@@ -1,31 +1,45 @@
 class FriendRequestsController < ApplicationController
-    def create
-      @friend_request = current_user.friend_requests.build(friend_id: params[:user_id])
-      @friend_request.save
+  def send_invitation
+    if current_user.send_invitation(params[:user_id])
+      flash.notice = 'Friend invitation sent'
       redirect_to users_path
+    else
+      flash.now[:notice] = 'error occured'
     end
-  
-    def accept
-      current_user.confirm_friend(User.find_by(id: params[:user_id]))
+  end
+
+  def accept_invitation
+    if current_user.confirm_invites(params[:user_id])
+      flash.notice = 'friend accepted'
       redirect_to users_path
+    else
+      flash.now[:notice] = 'error occured'
     end
-  
-    def reject
-      current_user.reject_friend(User.find_by(id: params[:user_id]))
+  end
+
+  def reject_invitation
+    current_user.reject_invites(params[:user_id])
+    redirect_to users_path
+  end
+
+  def pending_invitation
+    @pending_invitations = current_user.pending_invites
+  end
+
+  def destroy
+    user = User.find(params[:user_id])
+    friend = current_user.friend_requests.find_by_friend_id(user)
+    if friend
+      friend.delete
+      flash.notice = "#{user.name} has been removed as your friend"
       redirect_to users_path
+    else
+      flash.now[:notice] = 'error occurred'
     end
-  
-    def cancel
-      current_user.cancel_request(User.find_by(id: params[:user_id]))
-      redirect_to users_path
-    end
-  
-    def destroy
-      f1 = FriendRequest.all.find_by(user_id: params[:user_id], friend_id: current_user.id)
-      f2 = FriendRequest.all.find_by(user_id: current_user.id, friend_id: params[:user_id])
-      f1&.destroy
-      f2&.destroy
-      redirect_to users_path
-    end
+  end
+
+  def friends_list
+    @friends_list = current_user.friends
+  end
   end
   

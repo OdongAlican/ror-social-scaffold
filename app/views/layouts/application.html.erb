@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
   <body>
     <nav class="nav">
@@ -17,12 +18,19 @@
         <div class="menu-item">
           <%= menu_link_to 'All users', users_path %>
         </div>
+        <div class="menu-item">
+          <%= menu_link_to 'Friends', friends_list_path %>
+        </div>
+
       </div>
-      <% if current_user %>
-        <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Sign in', user_session_path %>
-      <% end %>
+         <div class = "sign_buttons">
+            <% if current_user %>
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= link_to 'Sign in', user_session_path %>
+            <% end %>
+          </div>
+     
     </nav>
     <% if notice.present? %>
       <div class="notice">
