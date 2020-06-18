@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @pending_invitations = current_user.pending_invites
+    @pending_invitations = current_user.pending_friends
   end
 
   def show

@@ -20,4 +20,11 @@
       </li>
     <% end %>
   </ul>
+
+  <h3 class = "bg-secondary text-white w-50 p-2 mt-5">Pending invitations</h3>
+  <% @pending_invitations.uniq.each do |invitation| %>
+  <ul >
+    <li><%= invitation.name.capitalize%></li>
+  </ul>
+  <% end %>
 </section>
