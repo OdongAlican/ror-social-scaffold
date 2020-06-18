@@ -18,8 +18,12 @@ class FriendRequestsController < ApplicationController
   end
 
   def reject_invitation
-    current_user.reject_invites(params[:user_id])
-    redirect_to users_path
+    if current_user.reject_invites(params[:user_id])
+      flash.notice = 'friend request declined'
+      redirect_to users_path
+    else
+      flash.now[:notice] = 'error occured'
+    end
   end
 
   def pending_invitation
