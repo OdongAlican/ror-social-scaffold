@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe User, type: :model do
- 
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(20) }
@@ -18,10 +17,10 @@ RSpec.describe User, type: :model do
   end
   describe 'user class methods' do
     before(:each) do
-      @user1 = FactoryBot.create(:user, name: "Sunday", email: "sunday@example.com")
-      @user2 = FactoryBot.create(:user, name:"john", email: "johnd@example.com")
-      @friend = FactoryBot.create(:user, name: 'Phyl', email: "phyl@example.com")
-      @friend_request1  = FactoryBot.create(:friend_request, user_id: @user1.id, friend_id: @friend.id, confirmed: false)
+      @user1 = FactoryBot.create(:user, name: 'Sunday', email: 'sunday@example.com')
+      @user2 = FactoryBot.create(:user, name: 'john', email: 'johnd@example.com')
+      @friend = FactoryBot.create(:user, name: 'Phyl', email: 'phyl@example.com')
+      @friend_request1 = FactoryBot.create(:friend_request, user_id: @user1.id, friend_id: @friend.id, confirmed: false)
       @friend_request2 = FactoryBot.create(:friend_request, user_id: @user2.id, friend_id: @friend.id, confirmed: true)
     end
 
@@ -39,7 +38,6 @@ RSpec.describe User, type: :model do
     it 'checks for pending friends' do
       @friend.send_invitation(@user1.id)
       expect(@user1.pending_friends).to include(@friend)
-      
     end
 
     it 'checks for confirming invitaion' do
@@ -77,7 +75,5 @@ RSpec.describe User, type: :model do
       @user1.send_invitation(@friend.id)
       expect(@user1.friends).not_to include(@friend)
     end
-
-
   end
 end
