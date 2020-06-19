@@ -43,21 +43,25 @@ a {
   color: $primary-color-light;
 
   .menu {
-    width: 80%;
+    width: 60%;
     justify-content: space-between;
+  
 
     .menu-item {
       float: left;
-      margin: 0 15px;
+      margin: 0 10px;
+      
 
       .active {
         a {
           color: #fff;
         }
+      
       }
     }
   }
 }
+
 
 .nav a {
   color: $primary-color-light;
