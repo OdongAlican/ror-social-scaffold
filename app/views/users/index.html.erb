@@ -2,6 +2,7 @@
 <section class="users-section">
   <ul class="users-list">
     <% @users.each do |user| %>
+      <% if user != current_user %>
       <li>
          Name: <%= user.name %>
         <span class="profile-link">
@@ -18,6 +19,7 @@
           <% end %>
         </span>
       </li>
+      <% end %>
     <% end %>
   </ul>
 
