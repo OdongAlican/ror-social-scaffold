@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-[Live link](https://tranquil-ridge-05431.herokuapp.com/users/sign_in) to the project.
+[Live link](https://rocky-dawn-62427.herokuapp.com/) to the project.
 
 
 ## Getting Started
